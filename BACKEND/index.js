@@ -6,6 +6,7 @@ import adminRoutes from "./routes/adminRoutes.js";
 import hostRoutes from "./routes/hostRoutes.js";
 import cors from 'cors';
 import mongoose from 'mongoose';
+import path from 'path';
 import {config} from 'dotenv';
 
 const app = express();
@@ -33,6 +34,15 @@ mongoose.connection.on('disconnected', () => {
 
 app.use(cors({
   origin: '*',
+}));
+
+app.use('/images', express.static(path.join(process.cwd(), 'public/images'), {
+  maxAge: '1y', 
+  setHeaders: (res, path) => {
+    if (path.endsWith('.jpg') || path.endsWith('.png') || path.endsWith('.gif')) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000'); 
+    }
+  }
 }));
 
 app.use(express.json());
