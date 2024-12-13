@@ -1,4 +1,4 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Searchform from '../components/Searchform'
@@ -26,7 +26,7 @@ function MainPage() {
 
     const fetchInitProperties = async () => {
 
-      try{
+      try {
         const response = await axios.get("http://localhost:8000/api/listings");
         setAllProperties(response.data);
         setError(null);
@@ -39,29 +39,26 @@ function MainPage() {
     fetchInitProperties();
     setLoading(false);
     setInitLoad(false);
-  },[]); //Empty array means it only runs once when mounted
+  }, []); //Empty array means it only runs once when mounted
 
   //Initial render list
   useEffect(() => {
 
-    const trendingProperties = allProperties.filter(property => 
+    const trendingProperties = allProperties.filter(property =>
       property.types.includes(activeCategory));
     setFilteredProperties(trendingProperties)
-  },[allProperties]);
+  }, [allProperties]);
 
-  const handleCategoryClick = (name) =>
-  {
-      setActiveCategory(name);
-      setCurrSearch("");
+  const handleCategoryClick = (name) => {
+    setActiveCategory(name);
+    setCurrSearch("");
   };
 
-  const handleSearchClick = (newSearch) =>
-  {
+  const handleSearchClick = (newSearch) => {
     setCurrSearch(newSearch);
   };
-  
-  const fetchProperties = () =>
-  {
+
+  const fetchProperties = () => {
     setLoading(true);
     setFilteredProperties([]);
 
@@ -70,15 +67,13 @@ function MainPage() {
     //Apply category filter
     if (activeCategory === "ALL") {
       propertiesToDisplay = allProperties;
-    } 
-    else 
-    {
+    }
+    else {
       propertiesToDisplay = allProperties.filter(property => property.types.includes(activeCategory));
     }
 
     //Apply search filter
-    if (currSearch) 
-    {
+    if (currSearch) {
       propertiesToDisplay = propertiesToDisplay.filter(property =>
         property.title.toLowerCase().includes(currSearch.toLowerCase())
       );
@@ -89,17 +84,16 @@ function MainPage() {
   };
 
   //For Category queries
-  useEffect(() => 
-  {
-      fetchProperties();
-  }, [activeCategory,currSearch]);
+  useEffect(() => {
+    fetchProperties();
+  }, [activeCategory, currSearch]);
 
   if (initload) {
     return (
-  <div className="flex flex-col justify-center items-center min-h-screen bg-gray-700">
-    <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
-    <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>
-  </div>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-700">
+        <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
+        <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>
+      </div>
     )
   }
 
@@ -107,23 +101,23 @@ function MainPage() {
     <div className="min-h-screen flex flex-col bg-gray-700">
       <Navbar />
       <Searchform currSearch={currSearch} handleSearchClick={handleSearchClick} />
-      <CategoryList activeCategory={activeCategory} handleCategoryClick={handleCategoryClick}/>
+      <CategoryList activeCategory={activeCategory} handleCategoryClick={handleCategoryClick} />
 
-      {loading &&  <div className="flex flex-col items-center mt-8">
+      {loading && <div className="flex flex-col items-center mt-8">
         <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
         <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>
-    </div>}
+      </div>}
 
       {error && <div className="text-center text-teal-400 text-2xl sm:text-5xl mt-8">
         <strong>An Error occured trying to fetch properties</strong>
-        </div>}
+      </div>}
 
       {!error && !loading && filteredProperties.length === 0 && <div className="text-center text-teal-400 text-2xl sm:text-5xl mt-8">
         <strong>No Available Properties</strong>
-        </div>}
+      </div>}
 
       <div className="flex-grow">
-        <ListingCardContainer properties={filteredProperties} detailsCallback={handleNavigate}/>
+        <ListingCardContainer properties={filteredProperties} detailsCallback={handleNavigate} />
       </div>
       <Footer className="mt-auto" />
     </div>

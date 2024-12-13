@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -12,10 +12,10 @@ const SignupPage = () => {
 
     const handleSignUp = async (e) => {
 
-        try{
+        try {
             setLoading(true);
             e.preventDefault();
-            const response = await axios.post("http://localhost:8000/api/auth/signup",{
+            const response = await axios.post("http://localhost:8000/api/auth/signup", {
                 username,
                 password,
                 role
@@ -24,11 +24,10 @@ const SignupPage = () => {
             navigate("/login");
         }
         catch (error) {
-            if(error.response) {
+            if (error.response) {
                 toast.error(error.response.data);
             }
-            else
-            {
+            else {
                 toast.error("Network Error");
             }
         }
@@ -95,7 +94,7 @@ const SignupPage = () => {
                             type="submit"
                             className="w-full px-4 py-2 text-white bg-violet-600 rounded-md hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            { loading ? "Signing Up...": "Sign up"}
+                            {loading ? "Signing Up..." : "Sign up"}
                         </button>
                     </div>
                     <div className="text-center">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useAuthStore } from '../store/useAuthStore';
@@ -18,7 +18,7 @@ const ListingForm = () => {
         amenities: [],
     });
 
-    const {user} = useAuthStore();
+    const { user } = useAuthStore();
 
     const [img, setImg] = useState(null); // Image file
 
@@ -48,18 +48,17 @@ const ListingForm = () => {
             if (!token) {
                 toast.error('Unauthorized');
             }
-            if(user.role === 'host') {
-                const response = await axios.post('http://localhost:8000/api/host/listings', form, {
+            if (user.role === 'host') {
+                await axios.post('http://localhost:8000/api/host/listings', form, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data',
                     },
                 });
-            toast.success('Property added successfully!');
-            } 
-            else 
-            {//is admin
-                const response = await axios.post('http://localhost:8000/api/admin/listings', form, {
+                toast.success('Property added successfully!');
+            }
+            else {
+                await axios.post('http://localhost:8000/api/admin/listings', form, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                         'Content-Type': 'multipart/form-data',

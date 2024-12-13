@@ -1,6 +1,5 @@
 
-const Item = ({title, Links}) =>
-{
+const Item = ({ title, Links }) => {
     return (
         <ul>
             <h1 className="mb-1 font-semibold">{title}</h1>

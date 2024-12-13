@@ -1,8 +1,5 @@
-import React from 'react';
-
 const BookingItem = ({ booking, property }) => {
-  if (!property) 
-  {
+  if (!property) {
     return (<div className="flex flex-col items-center mt-8">
       <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
       <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>

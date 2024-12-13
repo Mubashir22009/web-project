@@ -1,9 +1,8 @@
 
-const ListingCard = ({ property , detailsCallback}) => {
+const ListingCard = ({ property, detailsCallback }) => {
 
   //Details Callback
-  const handleNavigate = () => 
-  {
+  const handleNavigate = () => {
     detailsCallback(property._id);
   }
 
@@ -11,14 +10,14 @@ const ListingCard = ({ property , detailsCallback}) => {
   return (
     <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-900 flex flex-col h-full border-teal-400 border-2">
       {/* Property Image */}
-      <img className="w-full h-48 object-cover" src={"http://localhost:8000/images/"+property.img} alt={property.title} />
+      <img className="w-full h-48 object-cover" src={"http://localhost:8000/images/" + property.img} alt={property.title} />
 
       {/* Property Details */}
       <div className="px-6 py-4 flex-grow">
         {/* Property Title */}
         <div className="font-bold text-xl mb-2 text-teal-400">{property.title}</div>
-      
-      {/* Property types List */}
+
+        {/* Property types List */}
         <div className="flex flex-wrap mt-2">
           {property.types.map((type, index) => (
             <span key={index} className="bg-violet-700 rounded-full px-3 py-1 text-teal-400 text-sm mr-2 mb-2">
@@ -53,5 +52,5 @@ const ListingCard = ({ property , detailsCallback}) => {
     </div>
   );
 };
-  
-  export default ListingCard;
+
+export default ListingCard;

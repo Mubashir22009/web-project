@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useAuthStore } from '../store/useAuthStore';
@@ -7,14 +7,14 @@ const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-    const {setUser} = useAuthStore();
+    const { setUser } = useAuthStore();
 
     const handleLogin = async (e) => {
 
-        try{
+        try {
             setLoading(true);
             e.preventDefault();
-            const response = await axios.post("http://localhost:8000/api/auth/login",{
+            const response = await axios.post("http://localhost:8000/api/auth/login", {
                 username,
                 password,
             });
@@ -25,11 +25,10 @@ const LoginPage = () => {
         }
         catch (error) {
             console.log(error);
-            if(error.response) {
+            if (error.response) {
                 toast.error(error.response.data);
             }
-            else
-            {
+            else {
                 toast.error("Network Error");
             }
         }
@@ -79,7 +78,7 @@ const LoginPage = () => {
                             type="submit"
                             className="w-full px-4 py-2 text-white bg-violet-600 rounded-md hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
-                            { loading ? "Logging In...": "Login"}
+                            {loading ? "Logging In..." : "Login"}
                         </button>
                     </div>
                     <div className="text-center">

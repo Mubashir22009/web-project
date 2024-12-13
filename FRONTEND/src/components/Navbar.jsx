@@ -1,24 +1,24 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const {user, setUser} = useAuthStore();
+    const { user, setUser } = useAuthStore();
 
     const handleNavigate = (path) => {
-      navigate(path);
+        navigate(path);
     };
 
     const handleProfileNavigate = () => {
-        if(user.role === "admin") {
+        if (user.role === "admin") {
             navigate('/admin-panel');
         }
-        else if(user.role === "host") {
+        else if (user.role === "host") {
             navigate('/host-panel');
         }
-        else if(user.role === "guest") {
+        else if (user.role === "guest") {
             navigate('/user-profile');
         }
     };
@@ -43,7 +43,7 @@ const Navbar = () => {
     return (
         <nav className="bg-gray-900 p-4">
             <div className="flex items-center justify-between">
-            <img src="/assets/airbnb.png" alt="Logo" className="h-24 w-54 mr-2" />
+                <img src="/assets/airbnb.png" alt="Logo" className="h-24 w-54 mr-2" />
                 <div className="md:hidden">
                     <button className="text-teal-400" onClick={toggleMenu}>
                         <svg
@@ -61,9 +61,9 @@ const Navbar = () => {
                 </div>
 
                 <ul className="hidden md:flex space-x-4 items-center">
-                    <li><a href="#" onClick={() => handleNavigate('/')}  className='text-white text-2xl px-3 py-2 rounded hover:text-teal-400 duration-300'>Home</a></li>
-                    <li><a href="#" onClick={() => handleNavigate('/')}  className='text-white text-2xl px-3 py-2 rounded hover:text-teal-400 duration-300'>Experiences</a></li>
-                    <li><a href="#" onClick={() => handleNavigate('/')}  className='text-white text-2xl px-3 py-2 rounded hover:text-teal-400 duration-300'>Online Experiences</a></li>
+                    <li><a href="#" onClick={() => handleNavigate('/')} className='text-white text-2xl px-3 py-2 rounded hover:text-teal-400 duration-300'>Home</a></li>
+                    <li><a href="#" onClick={() => handleNavigate('/')} className='text-white text-2xl px-3 py-2 rounded hover:text-teal-400 duration-300'>Experiences</a></li>
+                    <li><a href="#" onClick={() => handleNavigate('/')} className='text-white text-2xl px-3 py-2 rounded hover:text-teal-400 duration-300'>Online Experiences</a></li>
                     <li className="relative">
                         <button className="text-white text-2xl px-3 py-2 rounded hover:text-teal-400 duration-300" onClick={toggleDropdown}>
                             My Profile
@@ -87,9 +87,9 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {isMenuOpen && (
                 <div className="md:hidden">
-                    <a href="#" onClick={() => handleNavigate('/')}  className="block py-2 text-white hover:text-teal-400 duration-300">Home</a>
-                    <a href="#" onClick={() => handleNavigate('/')}  className="block py-2 text-white hover:text-teal-400 duration-300">Experiences</a>
-                    <a href="#" onClick={() => handleNavigate('/')}  className="block py-2 text-white hover:text-teal-400 duration-300">Online Experiences</a>
+                    <a href="#" onClick={() => handleNavigate('/')} className="block py-2 text-white hover:text-teal-400 duration-300">Home</a>
+                    <a href="#" onClick={() => handleNavigate('/')} className="block py-2 text-white hover:text-teal-400 duration-300">Experiences</a>
+                    <a href="#" onClick={() => handleNavigate('/')} className="block py-2 text-white hover:text-teal-400 duration-300">Online Experiences</a>
                     <div className="relative">
                         <button className="block w-full text-left py-2 text-white hover:text-teal-400 duration-300" onClick={toggleDropdown}>
                             My Profile

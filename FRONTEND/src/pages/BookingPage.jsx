@@ -4,10 +4,9 @@ import Footer from "../components/Footer";
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { useAuthStore } from "../store/useAuthStore";
-import {toast} from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 
-const BookingPage = () => 
-{
+const BookingPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { user } = useAuthStore();
@@ -39,28 +38,25 @@ const BookingPage = () =>
         setLoading(false);
       }
     };
-  
+
     fetchPropertyDetails();
   }, [id]);
 
   const calculateTotalPrice = () => {
-    if (property === null)
-    {
+    if (property === null) {
       return;
     }
     const checkIn = new Date(checkInDate);
     const checkOut = new Date(checkOutDate);
 
-    if (checkOut > checkIn) 
-    {
+    if (checkOut > checkIn) {
       const days = Math.ceil(
         (checkOut - checkIn) / (1000 * 60 * 60 * 24)
       );
       setTotalPrice(days * property.price_per_night);
       setError("");
-    } 
-    else 
-    {
+    }
+    else {
       setError("Check-out date must be after check-in date.");
       setTotalPrice(0);
     }
@@ -68,13 +64,11 @@ const BookingPage = () =>
 
   const handleBooking = (e) => {
     e.preventDefault();
-    if (!checkInDate || !checkOutDate || !userName || !userEmail || !userContact) 
-    {
+    if (!checkInDate || !checkOutDate || !userName || !userEmail || !userContact) {
       setError("All fields are required.");
       return;
     }
-    if ( userContact.length !== 11) 
-    {
+    if (userContact.length !== 11) {
       setError("Contact number must be 11 digits.");
       return;
     }
@@ -90,11 +84,10 @@ const BookingPage = () =>
     try {
       setSentPost(true);
       const token = localStorage.getItem("token");
-      if (token) 
-      {
-          const response = await axios.post(`http://localhost:8000/api/bookings/${id}`,
+      if (token) {
+        const response = await axios.post(`http://localhost:8000/api/bookings/${id}`,
           {
-            user_id: user._id,  
+            user_id: user._id,
             user_name: userName,
             user_email: userEmail,
             user_contact: userContact,
@@ -105,23 +98,22 @@ const BookingPage = () =>
           },
           {
             headers: {
-                Authorization: `Bearer ${token}`,
-            }});
-          toast.success(response.data.message);
-          setSentPost(false);
-          navigate(`/`);
-        }
-      else
-      {
+              Authorization: `Bearer ${token}`,
+            }
+          });
+        toast.success(response.data.message);
+        setSentPost(false);
+        navigate(`/`);
+      }
+      else {
         toast.error("You need to be logged in to book a property");
       }
     }
     catch (error) {
-      if(error.response) {
+      if (error.response) {
         toast.error(error.response.data.message);
       }
-      else
-      {
+      else {
         toast.error("Network Error");
       }
       setSentPost(false);
@@ -132,27 +124,27 @@ const BookingPage = () =>
 
   if (loading) {
     return (
-  <div className="flex flex-col justify-center items-center min-h-screen bg-gray-700">
-    <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
-    <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>
-  </div>
+      <div className="flex flex-col justify-center items-center min-h-screen bg-gray-700">
+        <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
+        <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>
+      </div>
     )
   }
 
   if (errorPage) {
     return (
-    <div className="flex flex-col min-h-screen bg-gray-700">
-      <Navbar />
-      <main className="flex-grow container mx-auto px-4 py-8 flex justify-center items-center text-white">
-        <div className="text-teal-400 text-2xl sm:text-5xl text-center">
-          An Error occurred trying to fetch properties
-          <br />
-          <br/>
-          <p className="text-red-500 text-2xl sm:text-5xl text-center">{errorPage}</p>
-        </div>
-      </main>
-      <Footer />
-    </div>
+      <div className="flex flex-col min-h-screen bg-gray-700">
+        <Navbar />
+        <main className="flex-grow container mx-auto px-4 py-8 flex justify-center items-center text-white">
+          <div className="text-teal-400 text-2xl sm:text-5xl text-center">
+            An Error occurred trying to fetch properties
+            <br />
+            <br />
+            <p className="text-red-500 text-2xl sm:text-5xl text-center">{errorPage}</p>
+          </div>
+        </main>
+        <Footer />
+      </div>
     );
   }
 
@@ -167,7 +159,7 @@ const BookingPage = () =>
 
             <div>
               <img
-                src={"http://localhost:8000/images/"+property.img}
+                src={"http://localhost:8000/images/" + property.img}
                 alt={property.title}
                 className="rounded-lg mb-4 w-full h-64 object-cover"
               />
@@ -177,7 +169,7 @@ const BookingPage = () =>
               </p>
               <p className="text-yellow-500 font-medium">
                 Rating: {property.rating} ⭐ ({property.reviews_count} reviews)
-                </p>
+              </p>
               <p className="text-teal-400">
                 Price per night: <span className="font-semibold">${property.price_per_night}</span>
               </p>
@@ -280,15 +272,15 @@ const BookingPage = () =>
                 Calculate Total Price
               </button>
               {totalPrice > 0 && (
-                    <button
-                    type="button"
-                    onClick={confirmBooking} 
-                    disabled={sentPOST}
-                    className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded font-semibold mt-4"
-                    >
-                    Confirm Booking
-                    </button>
-                )}
+                <button
+                  type="button"
+                  onClick={confirmBooking}
+                  disabled={sentPOST}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded font-semibold mt-4"
+                >
+                  Confirm Booking
+                </button>
+              )}
             </form>
           </div>
         </div>
