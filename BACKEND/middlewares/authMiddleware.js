@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({message:"Unauthorized: No token provided or invalid format"});
+      return res.status(401).json({ message: "Unauthorized: No token provided or invalid format" });
     }
 
     const token = authHeader.split(" ")[1];
@@ -15,7 +15,7 @@ const verifyToken = (req, res, next) => {
     const isExpired = Date.now() >= decoded.exp * 1000;
 
     if (isExpired) {
-      return res.status(401).json({message:"Token Expired"});
+      return res.status(401).json({ message: "Token Expired" });
     }
 
     req.user = decoded;
@@ -23,7 +23,7 @@ const verifyToken = (req, res, next) => {
     next();
   } catch (err) {
     console.error(err);
-    return res.status(403).json({message:"Invalid Token"});
+    return res.status(403).json({ message: "Invalid Token" });
   }
 };
 

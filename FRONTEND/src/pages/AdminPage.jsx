@@ -89,8 +89,8 @@ function AdminPage() {
   if (initload) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen bg-gray-700">
-        <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
-        <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>
+        <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-gray-400 border-gray-300 rounded-full"></div>
+        <div className="text-gray-400 text-2xl sm:text-5xl mt-4">Loading</div>
       </div>
     )
   }
@@ -101,19 +101,19 @@ function AdminPage() {
 
       <div className="flex justify-center items-center bg-gray-800 mt-8 mb-4 space-x-4">
         <button
-          className={`px-4 py-2 rounded ${isListing === "A" ? 'bg-teal-500' : 'bg-violet-500'}`}
+          className={`px-4 py-2 rounded ${isListing === "A" ? 'bg-gray-500' : 'bg-gray-600'}`}
           onClick={() => setIsListing("A")}
         >
           Listings Management
         </button>
         <button
-          className={`px-4 py-2 rounded ${isListing === "B" ? 'bg-teal-500' : 'bg-violet-500'}`}
+          className={`px-4 py-2 rounded ${isListing === "B" ? 'bg-gray-500' : 'bg-gray-600'}`}
           onClick={() => setIsListing("B")}
         >
           Bookings Management
         </button>
         <button
-          className={`px-4 py-2 rounded ${isListing === "C" ? 'bg-teal-500' : 'bg-violet-500'}`}
+          className={`px-4 py-2 rounded ${isListing === "C" ? 'bg-gray-500' : 'bg-gray-600'}`}
           onClick={() => setIsListing("C")}
         >
           Add a Listing
@@ -121,19 +121,19 @@ function AdminPage() {
       </div>
 
       {loading && <div className="flex flex-col items-center mt-8">
-        <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
-        <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>
+        <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-gray-400 border-gray-300 rounded-full"></div>
+        <div className="text-gray-400 text-2xl sm:text-5xl mt-4">Loading</div>
       </div>}
 
       {error && <div className="text-center text-red-400 text-2xl sm:text-5xl mt-8">
-        <strong>An Error occured loading listings and bookings</strong>
+        <strong>An Error occurred loading listings and bookings</strong>
       </div>}
 
-      {!error && !loading && isListing === "A" && listings.length === 0 && <div className="text-center text-teal-400 text-2xl sm:text-5xl mt-8">
+      {!error && !loading && isListing === "A" && listings.length === 0 && <div className="text-center text-gray-400 text-2xl sm:text-5xl mt-8">
         <strong>No Available listings</strong>
       </div>}
 
-      {!error && !loading && isListing === "B" && bookings.length === 0 && <div className="text-center text-teal-400 text-2xl sm:text-5xl mt-8">
+      {!error && !loading && isListing === "B" && bookings.length === 0 && <div className="text-center text-gray-400 text-2xl sm:text-5xl mt-8">
         <strong>No Available Bookings</strong>
       </div>}
 

@@ -11,7 +11,6 @@ const BookingPage = () => {
   const { id } = useParams();
   const { user } = useAuthStore();
 
-  //STATES FOR BOOKING FORM
   const [checkInDate, setCheckInDate] = useState("");
   const [checkOutDate, setCheckOutDate] = useState("");
   const [userName, setUserName] = useState("");
@@ -20,7 +19,6 @@ const BookingPage = () => {
   const [error, setError] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
 
-  //STATES FOR PAGE ITSELF
   const [property, setProperty] = useState(null);
   const [loading, setLoading] = useState(true);
   const [errorPage, setErrorPage] = useState(null);
@@ -120,13 +118,11 @@ const BookingPage = () => {
     }
   };
 
-  //Rendering
-
   if (loading) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen bg-gray-700">
-        <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-teal-400 border-gray-300 rounded-full"></div>
-        <div className="text-teal-400 text-2xl sm:text-5xl mt-4">Loading</div>
+        <div className="animate-spin h-12 w-12 border-4 border-t-4 border-t-gray-400 border-gray-300 rounded-full"></div>
+        <div className="text-gray-400 text-2xl sm:text-5xl mt-4">Loading</div>
       </div>
     )
   }
@@ -136,7 +132,7 @@ const BookingPage = () => {
       <div className="flex flex-col min-h-screen bg-gray-700">
         <Navbar />
         <main className="flex-grow container mx-auto px-4 py-8 flex justify-center items-center text-white">
-          <div className="text-teal-400 text-2xl sm:text-5xl text-center">
+          <div className="text-gray-400 text-2xl sm:text-5xl text-center">
             An Error occurred trying to fetch properties
             <br />
             <br />
@@ -153,7 +149,7 @@ const BookingPage = () => {
       <Navbar />
 
       <main className="flex-grow bg-gray-700 py-8 px-4">
-        <div className="max-w-4xl mx-auto bg-gray-800 text-teal-400 rounded-lg shadow-md p-6">
+        <div className="max-w-4xl mx-auto bg-gray-800 text-gray-400 rounded-lg shadow-md p-6">
           <h1 className="text-2xl font-bold mb-4">Booking for {property.title}</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
@@ -164,16 +160,16 @@ const BookingPage = () => {
                 className="rounded-lg mb-4 w-full h-64 object-cover"
               />
               <h2 className="text-xl font-bold">{property.title}</h2>
-              <p className="text-teal-400">
+              <p className="text-gray-400">
                 Location: <span className="font-semibold">{property.location}</span>
               </p>
               <p className="text-yellow-500 font-medium">
                 Rating: {property.rating} ⭐ ({property.reviews_count} reviews)
               </p>
-              <p className="text-teal-400">
+              <p className="text-gray-400">
                 Price per night: <span className="font-semibold">${property.price_per_night}</span>
               </p>
-              <p className="text-teal-400">
+              <p className="text-gray-400">
                 Total Price:{" "}
                 <span className="font-semibold">
                   {totalPrice > 0 ? `$${totalPrice}` : "Select dates to calculate"}
@@ -181,12 +177,11 @@ const BookingPage = () => {
               </p>
             </div>
 
-            {/* Booking Form */}
             <form onSubmit={handleBooking} className="space-y-4">
               <div>
                 <label
                   htmlFor="userName"
-                  className="block text-sm font-medium text-teal-400"
+                  className="block text-sm font-medium text-gray-400"
                 >
                   Name
                 </label>
@@ -195,14 +190,14 @@ const BookingPage = () => {
                   id="userName"
                   value={userName}
                   onChange={(e) => setUserName(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-blue-500 focus:border-blue-500 sm:text-sm placeholder-teal-400"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-gray-500 focus:border-gray-500 sm:text-sm placeholder-gray-400"
                   placeholder="Your Name"
                 />
               </div>
               <div>
                 <label
                   htmlFor="userEmail"
-                  className="block text-sm font-medium text-teal-400"
+                  className="block text-sm font-medium text-gray-400"
                 >
                   Email
                 </label>
@@ -211,14 +206,14 @@ const BookingPage = () => {
                   id="userEmail"
                   value={userEmail}
                   onChange={(e) => setUserEmail(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-blue-500 focus:border-blue-500 sm:text-sm placeholder-teal-400"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-gray-500 focus:border-gray-500 sm:text-sm placeholder-gray-400"
                   placeholder="Your Email"
                 />
               </div>
               <div>
                 <label
                   htmlFor="userContact"
-                  className="block text-sm font-medium text-teal-400"
+                  className="block text-sm font-medium text-gray-400"
                 >
                   Contact Number
                 </label>
@@ -227,16 +222,15 @@ const BookingPage = () => {
                   id="userContact"
                   value={userContact}
                   onChange={(e) => setUserContact(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-blue-500 focus:border-blue-500 sm:text-sm placeholder-teal-400"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-gray-500 focus:border-gray-500 sm:text-sm placeholder-gray-400"
                   placeholder="Your Contact Number"
                 />
               </div>
 
-              {/* Check-in and Check-out Dates */}
               <div>
                 <label
                   htmlFor="checkInDate"
-                  className="block text-sm font-medium text-teal-400"
+                  className="block text-sm font-medium text-gray-400"
                 >
                   Check-in Date
                 </label>
@@ -245,13 +239,13 @@ const BookingPage = () => {
                   id="checkInDate"
                   value={checkInDate}
                   onChange={(e) => setCheckInDate(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 />
               </div>
               <div>
                 <label
                   htmlFor="checkOutDate"
-                  className="block text-sm font-medium text-teal-400"
+                  className="block text-sm font-medium text-gray-400"
                 >
                   Check-out Date
                 </label>
@@ -260,14 +254,14 @@ const BookingPage = () => {
                   id="checkOutDate"
                   value={checkOutDate}
                   onChange={(e) => setCheckOutDate(e.target.value)}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm bg-gray-600 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                 />
               </div>
               {error && <p className="text-red-500 text-sm">{error}</p>}
 
               <button
                 type="submit"
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded font-semibold"
+                className="w-full bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded font-semibold"
               >
                 Calculate Total Price
               </button>

@@ -13,21 +13,15 @@ const Searchform = ({ currSearch, handleSearchClick }) => {
         handleSearchClick(searchTerm);
     };
 
-
     return (
-        <div className="bg-gray-900 text-white">
-            <form className="md:flex md:justify-between md:items-center sm:px-12 px-4 bg-[#ffffff19] py-7"
+        <div className="bg-black text-white flex justify-center items-center w-full">
+            <form className="flex flex-col md:flex-row md:justify-center md:items-center py-4 px-4 rounded w-full"
                 onSubmit={handleSearchSubmit}>
-                <h1 className="lg:text-4xl text-3xl md:mb-0 mb-6 lg:leading-normal font-semibold
-                md:w-2/5">
-                    Where Every Stay <br></br><span className="text-teal-400">Feels Like a Dream</span>
-                </h1>
-                <div>
+                <div className="flex flex-col md:flex-row items-center w-full md:w-1/2">
                     <input type="text" placeholder="What are you looking for?" onChange={handleSearchInput}
-                        className="text-gray-800 sm:w-72 w-full sm:mr-5 mr-1 lg:mb-0 mb-4 py-2.5 rounded 
-                    px-2 focus:outline-none" />
-                    <button className="bg-teal-400 hover:bg-teal-500 duration-300 px-5 py-2.5 font-[Poppins]
-                    rounded-md text-white md:w-auto w-full" type="submit" disabled={!searchTerm}>
+                        className="text-gray-800 w-full mb-4 md:mb-0 py-2 px-2 rounded-full focus:outline-none md:mr-4" />
+                    <button className="bg-teal-400 hover:bg-teal-500 duration-300 px-4 py-2 rounded-full text-white w-full md:w-auto"
+                        type="submit" disabled={!searchTerm}>
                         Search
                     </button>
                 </div>
