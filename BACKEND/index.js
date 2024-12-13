@@ -6,18 +6,11 @@ import adminRoutes from "./routes/adminRoutes.js";
 import hostRoutes from "./routes/hostRoutes.js";
 import cors from 'cors';
 import mongoose from 'mongoose';
-import path from 'path';
+import {config} from 'dotenv';
 
 const app = express();
 
-app.use('/images', express.static(path.join(process.cwd(), 'public/images'), {
-    maxAge: '1y', 
-    setHeaders: (res, path) => {
-      if (path.endsWith('.jpg') || path.endsWith('.png') || path.endsWith('.gif')) {
-        res.setHeader('Cache-Control', 'public, max-age=31536000'); 
-      }
-    }
-  }));
+config();
 
 const port = 8000;
 
@@ -27,35 +20,33 @@ mongoose.connect(URI);
 console.log(URI);
 
 mongoose.connection.once('open', () => {
-    console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB');
 });
 
 mongoose.connection.on('error', (err) => {
-    console.log('Error: ', err);
+  console.log('Error: ', err);
 });
 
-mongoose.connection.on('disconnected', () => { 
-    console.log('MongoDB disconnected');
+mongoose.connection.on('disconnected', () => {
+  console.log('MongoDB disconnected');
 });
 
 app.use(cors({
-    origin: 'http://localhost:5173',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
+  origin: '*',
 }));
 
-//Listing Routes => /api/listings
 app.use(express.json());
+
 app.use('/api/listings', listingRoutes);
-//Booking Routes => /api/booking
+
 app.use('/api/bookings', bookingRoutes);
-//User Routes => /api/auth
+
 app.use("/api/auth", userRoutes);
-//Admin Routes => /api/admin
+
 app.use("/api/admin", adminRoutes);
-//Host Routes => /api/host
+
 app.use("/api/host", hostRoutes);
 
 app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });

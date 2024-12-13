@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "bnbserver.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node --env-file=.env bnbserver.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
