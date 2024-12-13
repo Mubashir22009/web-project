@@ -1,6 +1,7 @@
 import express from "express";
 import Property from '../models/Property.js';
-import properties from '../PROPERTIES.json' assert { type: 'json' };//for seeding database
+import fs from 'fs';
+const properties = JSON.parse(fs.readFileSync(new URL('../PROPERTIES.json', import.meta.url)));
 
 const router = express.Router();
 
